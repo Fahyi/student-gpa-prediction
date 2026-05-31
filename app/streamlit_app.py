@@ -27,12 +27,12 @@ st.divider()
 
 major_category = st.selectbox(
     "Bidang studi kamu",
-    ["Computer Science", "Engineering", "Business", "Social Sciences", "Health Sciences", "Arts & Humanities"]
+    ["Arts", "Business", "Humanities", "Medical", "STEM"]
 )
 
 year_of_study = st.selectbox(
     "Tahun perkuliahan saat ini",
-    ["First Year", "Second Year", "Third Year", "Fourth Year"]
+    ["Freshman", "Sophomore", "Junior", "Senior", "Graduate"]
 )
 
 pre_semester_gpa = st.number_input(
@@ -52,7 +52,7 @@ weekly_genai_hours = st.number_input(
 
 primary_use_case = st.selectbox(
     "Kegunaan utama AI generatif dalam kuliah",
-    ["Assignment Help", "Research", "Coding", "Writing", "Exam Preparation", "Other"]
+    ["Copywriting/Drafting", "Debugging/Troubleshooting", "Direct_Answer_Generation", "Ideation", "Summarizing_Reading"]
 )
 
 prompt_engineering_skill = st.selectbox(
@@ -81,22 +81,22 @@ traditional_study_hours = st.number_input(
 )
 
 perceived_ai_dependency = st.slider(
-    "Seberapa bergantung kamu pada AI untuk tugas kuliah? (1 = tidak sama sekali, 5 = sangat bergantung)",
+    "Seberapa bergantung kamu pada AI untuk tugas kuliah? (1 = tidak sama sekali, 10 = sangat bergantung)",
     min_value=1,
-    max_value=5,
-    value=3
+    max_value=10,
+    value=5
 )
 
 institutional_policy = st.selectbox(
     "Kebijakan kampus soal penggunaan AI generatif",
-    ["Allowed", "Restricted", "Banned", "No Policy"]
+    ["Actively_Encouraged", "Allowed_With_Citation", "Strict_Ban"]
 )
 
 anxiety_level = st.slider(
-    "Seberapa cemas kamu saat menghadapi ujian? (1 = sangat tenang, 5 = sangat cemas)",
+    "Seberapa cemas kamu saat menghadapi ujian? (1 = sangat tenang, 10 = sangat cemas)",
     min_value=1,
-    max_value=5,
-    value=3
+    max_value=10,
+    value=5
 )
 
 skill_retention_score = st.number_input(
