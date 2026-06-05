@@ -4,7 +4,7 @@ import joblib
 from pathlib import Path
 
 st.set_page_config(
-    page_title="Student GPA Prediction",
+    page_title="Student Academic Performance Analytics",
     layout="centered"
 )
 
@@ -21,6 +21,11 @@ st.title("Prediksi IPK Akhir Semester")
 st.write(
     "Isi formulir di bawah sesuai kondisi kamu saat ini. "
     "Sistem akan memperkirakan IPK kamu di akhir semester."
+)
+st.caption(
+    "Catatan: model paling akurat ketika semua input tersedia sebelum prediksi dibuat. "
+    "Jika skor retensi atau burnout baru diketahui di akhir semester, gunakan hasil ini "
+    "sebagai diagnostic review, bukan early-warning forecast."
 )
 
 st.divider()
@@ -46,13 +51,21 @@ pre_semester_gpa = st.number_input(
 weekly_genai_hours = st.number_input(
     "Jam per minggu menggunakan AI generatif (ChatGPT, Gemini, dll)",
     min_value=0.0,
+    max_value=40.0,
     value=5.0,
     step=0.5
 )
 
 primary_use_case = st.selectbox(
     "Kegunaan utama AI generatif dalam kuliah",
-    ["Copywriting/Drafting", "Debugging/Troubleshooting", "Direct_Answer_Generation", "Ideation", "Summarizing_Reading"]
+    [
+        "Copywriting/Drafting",
+        "Debugging/Troubleshooting",
+        "Direct_Answer_Generation",
+        "Ideation",
+        "Summarizing_Reading",
+    ],
+    format_func=lambda value: value.replace("_", " ")
 )
 
 prompt_engineering_skill = st.selectbox(
@@ -62,8 +75,8 @@ prompt_engineering_skill = st.selectbox(
 
 tool_diversity = st.number_input(
     "Jumlah tools AI berbeda yang kamu gunakan",
-    min_value=0,
-    max_value=10,
+    min_value=1,
+    max_value=5,
     value=3,
     step=1
 )
@@ -75,7 +88,8 @@ paid_subscription = st.selectbox(
 
 traditional_study_hours = st.number_input(
     "Jam per minggu belajar mandiri (tanpa AI)",
-    min_value=0.0,
+    min_value=1.0,
+    max_value=36.0,
     value=12.0,
     step=0.5
 )
@@ -89,7 +103,8 @@ perceived_ai_dependency = st.slider(
 
 institutional_policy = st.selectbox(
     "Kebijakan kampus soal penggunaan AI generatif",
-    ["Actively_Encouraged", "Allowed_With_Citation", "Strict_Ban"]
+    ["Actively_Encouraged", "Allowed_With_Citation", "Strict_Ban"],
+    format_func=lambda value: value.replace("_", " ")
 )
 
 anxiety_level = st.slider(
@@ -100,8 +115,8 @@ anxiety_level = st.slider(
 )
 
 skill_retention_score = st.number_input(
-    "Seberapa baik kamu mempertahankan pemahaman materi setelah belajar (0-100)",
-    min_value=0.0,
+    "Seberapa baik kamu mempertahankan pemahaman materi setelah belajar (10-100)",
+    min_value=10.0,
     max_value=100.0,
     value=75.0,
     step=0.5
